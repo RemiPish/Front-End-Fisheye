@@ -74,3 +74,46 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+
+.photographerName {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 47px;
+
+    text-align: center;
+    color: #D3573C;
+    margin-bottom: 0;
+}
+
+.photographerImg {
+    height: 200px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+
+}
+
+.photographerLocation {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+
+    text-align: center;
+
+    color: #901C1C;
+}
+
+.photographerTagline {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 13px;
+    /* identical to box height */
+
+    text-align: center;
+    color: #000;
+}
