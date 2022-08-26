@@ -1,71 +1,71 @@
-function photographerFactory(photographer) {
+class photographerMedia {
 
-    const photographerPicture = `assets/photographers/Photographers_ID_Photos/${photographer['portrait']}`;
-    const photographerName = photographer['name'];
-    const photographerLocation = `${photographer['city']}, ${photographer['country']}`;
-    const photographerTagline = photographer['tagline'];
-    const photographerPrice = `${photographer['price']}€/jour`;
-    const photographerid = photographer['id'];
+    constructor(media, name) {
+        this.mediaIsImage = media.hasOwnProperty('image') ? true : false;
+        this.mediaSrc = this.mediaIsImage ? `assets/photographers/${name}/${media['image']}` : `assets/photographers/${name}/${media['video']}`;
+        this.mediaName = media['name'];
+        this.mediaLikeNumber = media['likes'];
+        this.mediaLiked = false;
 
-    function getPhotographerDOM() {
-        const article = document.createElement('article');;
+    }
 
-        const img = document.createElement('img');
-        img.setAttribute("src", photographerPicture);
-        img.setAttribute("alt", `La photo du photographe ${photographerName}`);
-        img.className += 'photographerImg';
+    render() {
 
-        const h2 = document.createElement('h2');
-        h2.textContent = photographerName;
-        h2.ariaLabel = `Nom du photographe: ${photographerName}`;
-        h2.className += 'photographerName';
+        const article = document.createElement('article');
+        let media;
+        if (this.mediaIsImage) {
+            media = document.createElement('img');
+            media.setAttribute("src", this.mediaSrc);
+            media.setAttribute("alt", `${this.mediaName}`);
+        }
+        else {
+            media = document.createElement('video');
+            media.setAttribute("width", "350");
+            media.setAttribute("width", "300");
+            media.setAttribute(controls);
 
-        const divLocation = document.createElement('div');
-        divLocation.textContent = photographerLocation;
-        divLocation.className += 'photographerLocation';
-        divLocation.ariaLabel = `Venant de : ${photographerLocation}`;
+            let videoSource = document.createElement('source');
+            videoSource.setAttribute("src", this.mediaSrc);
+            videoSource.setAttribute("type", "video/mp4");
 
-        const divTagline = document.createElement('div');
-        divTagline.textContent = photographerTagline;
-        divTagline.className += 'photographerTagline';
-        divTagline.ariaLabel = `Son slogan : ${photographerTagline}`;
+            media.appendChild(videoSource);
+        }
+        media.className += "media";
 
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(divLocation);
-        article.appendChild(divTagline);
+        const name = document.createElement('label');
+        name.setAttribute("for", "media");
+        name.textContent = this.mediaName;
+        name.className += "mediaName";
+
+        const likeNumber = document.createElement('span');
+        likeNumber.textContent = this.mediaLikeNumber;
+        likeNumber.className += "likeNumber";
+
+
+        const likeButton = document.createElement('i');
+        likeButton.className += "fa-regular"
+        likeButton.className += "fa-heart";
+
+        likeButton.setAttribute("onclick", "this.clikeLikeMedia(this)");
+
+        article.appendChild(media);
+        article.appendChild(name);
+        article.appendChild(likeNumber);
+        article.appendChild(likeButton);
         return (article);
     }
 
-    return { getPhotographerDOM }
-}
-
-function mediaFactory(name, media) {
-
-    console.log(name)
-    const mediaPicture = `assets/photographers/${name}/${media['image']}`;
-    const mediaName = media['name'];
-
-    function getMediaDOM() {
-        const div = document.createElement('div');;
-
-        const img = document.createElement('img');
-        img.setAttribute("src", mediaPicture);
-        img.setAttribute("alt", mediaName);
-        img.className += 'mediaImg';
-
-        const h2 = document.createElement('h2');
-        h2.textContent = mediaName;
-        h2.ariaLabel = `Nom du photo: ${mediaName}`;
-        h2.className += 'mediaName';
-
-        div.appendChild(img);
-        div.appendChild(h2);
-       
-        return (div);
+    clickLikeMedia(button) {
+        if (this.mediaLiked) {
+            button.classList.replace("fa-solid", "fa-regular");
+            this.mediaLikeNumber--;
+        }
+        else {
+            button.classList.replace("fa-regular", "fa-solid");
+            this.mediaLikeNumber++;
+        }
     }
-
-    return { getMediaDOM }
 }
+
 
 

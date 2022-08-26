@@ -1,44 +1,48 @@
-function photographerFactory(data) {
+class photographer{
 
-    const photographer = data;
-    const picture = `assets/photographers/Photographers_ID_Photos/${photographer['portrait']}`;
-    const name = photographer['name'];
-    const location = `${photographer['city']}, ${photographer['country']}`;
-    const tagline = photographer['tagline'];
-    const price = `${photographer['price']}€/jour`;
-    const id = photographer['id'];
+    constructor(data)
+    {
+        const photographer = data;
+        this.name = photographer['name'];
+        this.picture = `assets/photographers/Photographers_ID_Photos/${photographer['portrait']}`;
+        this.location = `${photographer['city']}, ${photographer['country']}`;
+        this.tagline = photographer['tagline'];
+        this.price = `${photographer['price']}€/jour`;
+        this.id = photographer['id'];
+    }
 
-    function getUserCardDOM() {
+    render()
+    {
         const article = document.createElement('article');
 
         const anchor = document.createElement('a');
-        anchor.setAttribute("href", `/photographer.html?id=${id}`);
+        anchor.setAttribute("href", `/photographer.html?id=${this.id}`);
         anchor.setAttribute("target", '_blank');
         anchor.ariaLabel = `Aller sur la page de : ${name}`;
 
         const img = document.createElement('img');
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", `La photo du photographe ${name}`);
+        img.setAttribute("src", this.picture);
+        img.setAttribute("alt", `La photo du photographe ${this.name}`);
 
         const h2 = document.createElement('h2');
-        h2.textContent = name;
-        h2.ariaLabel = `Nom du photographe: ${name}`;
+        h2.textContent = this.name;
+        h2.ariaLabel = `Nom du photographe: ${this.name}`;
 
         const divLocation = document.createElement('div');
-        divLocation.textContent = location;
+        divLocation.textContent = this.location;
         divLocation.className += 'location';
-        divLocation.ariaLabel = `Venant de : ${location}`;
+        divLocation.ariaLabel = `Venant de : ${this.location}`;
 
         const divTagline = document.createElement('div');
-        divTagline.textContent = tagline;
+        divTagline.textContent = this.tagline;
         divTagline.className += 'tagline';
-        divTagline.ariaLabel = `Son slogan : ${tagline}`;
+        divTagline.ariaLabel = `Son slogan : ${this.tagline}`;
 
 
         const divPrice = document.createElement('div');
-        divPrice.textContent = price;
+        divPrice.textContent = this.price;
         divPrice.className += 'price';
-        divPrice.ariaLabel = `Tarif : ${price}`;
+        divPrice.ariaLabel = `Tarif : ${this.price}`;
 
 
         article.appendChild(anchor);
@@ -47,7 +51,8 @@ function photographerFactory(data) {
         anchor.appendChild(divLocation);
         anchor.appendChild(divTagline);
         anchor.appendChild(divPrice);
+
         return (article);
     }
-    return { name, picture, getUserCardDOM }
 }
+

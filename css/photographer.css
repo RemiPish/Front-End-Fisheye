@@ -117,3 +117,12 @@ form input {
     text-align: center;
     color: #000;
 }
+
+.media{
+    width: 350px;
+    height: 300px;
+}
+
+.photograph-header article img{
+    width: 50%;
+}
