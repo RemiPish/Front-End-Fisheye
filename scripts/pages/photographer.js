@@ -1,32 +1,47 @@
 //Mettre le code JavaScript lié à la page photographer.html
+let photographerName = "";
+
 function getPhotographerByID(id) {
-    let photographer = photographers.filter(elt => parseInt(id) === elt.id);
+    let photographerList = [...photographers.photographers];
+    let photographer = photographerList.filter(elt => parseInt(id) === elt.id);
     return photographer[0];
 }
 
-async function displayData() {
-    let mediaList = await getPhotographerMedia();
+async function displayPhotographer() {
 
     const photographerData = getPhotographerByID(getPhotographerID());
-    const photographerName = photographerData.name;
+    photographerName = photographerData.name;
     let photographerClass = new photographer(photographerData);
 
     const photographersSection = document.querySelector(".photograph-header");
-    photographersSection.appendChild(photographerClass.render());
+    photographersSection.appendChild(photographerClass.renderPhotographer());
 
+};
+
+async function displayMedia() {
     const mediaSection = document.querySelector(".media-list");
-    mediaList.forEach((elt) => {
-        let media = new photographerMedia(elt, photographerName);
-        mediaSection.appendChild(media.render());
+    let id = getPhotographerID();
+    let mediaList = [...photographers.media];
+    let list = mediaList.filter(elt => {
+        return id == elt.photographerId;
+    })
+    let factory = new mediaFactory();
+    let media = [];
+    list.forEach(item => {
+        media.push(factory.build(item, photographerName))
+    })
+
+    media.forEach((elt) => {
+        mediaSection.appendChild(elt.render());
     });
 
-
-};
-
+}
 async function init() {
     photographers = await getPhotographers();
-    displayData();
-    
+    displayPhotographer();
+    displayMedia();
+
 };
+
 
 init();

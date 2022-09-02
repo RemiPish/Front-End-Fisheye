@@ -3,10 +3,28 @@
 }
 
 .photograph-header {
+    display: flex;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
 }
+
+.photograph-header article {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.photograph-header article img {
+    height: 200px;
+    width: 200px;
+    margin: auto 50px;
+    border-radius: 50%;
+}
+
+
+
 
 .contact_button {
     font-size: 20px;
@@ -75,54 +93,80 @@ form input {
     border-radius: 5px;
 }
 
+.photographer-info {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-.photographerName {
+.photographer-info h2 {
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
     line-height: 47px;
 
-    text-align: center;
+
     color: #D3573C;
     margin-bottom: 0;
 }
 
-.photographerImg {
-    height: 200px;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 50%;
 
-}
-
-.photographerLocation {
+.location {
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 17px;
+    font-size: 24px;
+    line-height: 31px;
 
-    text-align: center;
+
 
     color: #901C1C;
 }
 
-.photographerTagline {
+.tagline {
     font-style: normal;
     font-weight: 400;
-    font-size: 10px;
-    line-height: 13px;
-    /* identical to box height */
+    font-size: 18px;
+    line-height: 23px;
 
-    text-align: center;
-    color: #000;
+    color: #525252;
 }
 
-.media{
+.media {
     width: 350px;
     height: 300px;
 }
 
-.photograph-header article img{
-    width: 50%;
+
+.media-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin: 50px;
+}
+
+.media-list article {
+    display: flex;
+    flex-direction: column;
+}
+
+.media-text {
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+}
+
+.mediaName, i, .likeNumber {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+
+    color: #911C1C;
+}
+
+.media-like{
+    display: flex;
+    gap:10px;
+    align-items: center;
 }
