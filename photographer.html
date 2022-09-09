@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <title>Fisheye - photographe </title>
 </head>
 
@@ -15,23 +15,45 @@
     <img src="assets/images/logo.png" class="logo" />
   </header>
   <main id="main">
-    <div class="photograph-header">
+    <div class="photograph-header"></div>
+    <div class="totalLikes-price"></div>
+    <div class="sort-div">
+      <span>
+        <label for="sort-select">Trier par </label>
+        <select id="sort-select">
+          <option value="popularite">Popularité</option>
+          <option value="date">Date</option>
+          <option value="titre">Titre</option>
+        </select>
+      </span>
     </div>
-    <div class="media-list">
-
-    </div>
+    <div class="media-list"></div>
   </main>
   <div id="contact_modal">
-    <div class="modal">
+    <div>
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <h1>Contactez-moi</h1>
+        <span class="close-btn" onclick="closeModal()">X</span>
       </header>
-      <form>
+      <form name="contact" action="index.html" method="get">
         <div>
+          <label>Prénom</label>
+          <input>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <div>
+          <label>Name</label>
+          <input>
+        </div>
+        <div>
+          <label>Email</label>
+          <input>
+        </div>
+        <div>
+          <label>Votre message</label>
+          <textarea></textarea>
+        </div>
       </form>
+      <button>Envoyer</button>
     </div>
   </div>
   <script src="scripts/fetchData.js"></script>

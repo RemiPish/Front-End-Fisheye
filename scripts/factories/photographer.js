@@ -36,7 +36,6 @@ class photographer {
         const contactBtn = document.createElement('button');
         contactBtn.textContent = "Contactez-moi";
         contactBtn.className += "contact_button";
-        contactBtn.setAttribute("onclick", '_blank');
 
         const photographerInfo = document.createElement("div")
         photographerInfo.className += "photographer-info";

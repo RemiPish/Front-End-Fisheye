@@ -1,5 +1,14 @@
 #contact_modal {
     display: none;
+    position: fixed;
+    z-index: 100;
+    left: 22%;
+    top: 20%;
+    height: 669px;
+    width: 900px;
+    background: #DB8876;
+    border-radius: 5px;
+    overflow: auto;
 }
 
 .photograph-header {
@@ -156,7 +165,9 @@ form input {
     justify-content: space-between;
 }
 
-.mediaName, i, .likeNumber {
+.mediaName,
+i,
+.likeNumber {
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -165,8 +176,50 @@ form input {
     color: #911C1C;
 }
 
-.media-like{
+.media-like {
     display: flex;
-    gap:10px;
+    gap: 10px;
     align-items: center;
+}
+
+.totalLikes-price {
+    display: flex;
+    justify-content: space-between;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    background: #DB8876;
+    border-radius: 5px;
+
+    width: 376px;
+    height: 89px;
+    z-index: 100;
+}
+
+.totalLikes-price * {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31px;
+    text-align: right;
+    color: #000000;
+}
+
+.totalLikes {
+    display: flex;
+    gap: 10px;
+}
+
+.totalLikes,
+.price {
+    margin: 30px;
+}
+
+.close-btn{
+    color:white;
+    font-size: 30px;
+    font-weight: 500;
 }
