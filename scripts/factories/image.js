@@ -2,6 +2,7 @@ class image extends photographerMedia {
     constructor(data, name) {
         super(data);
         this.src = `assets/photographers/${name}/${data['image']}`
+        this.type = 'image';
     }
 
     render() {

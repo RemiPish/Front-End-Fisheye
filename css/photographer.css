@@ -218,8 +218,88 @@ i,
     margin: 30px;
 }
 
-.close-btn{
-    color:white;
+.close-btn {
+    color: white;
     font-size: 30px;
     font-weight: 500;
+}
+
+.text-control {
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 20px;
+    height: 48px;
+}
+
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 0.4em;
+    color: #e54858;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: right;
+    line-height: 0.3;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.formData[data-error-visible="true"]::after {
+    opacity: 1;
+}
+
+.formData[data-error-visible="true"] .text-control {
+    border: 2px solid #e54858;
+}
+
+.lightbox,
+.lightbox-div {
+    display: flex;
+}
+
+.lightbox-div {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lightbox-img img {
+    width: 70vw;
+    height: 70vh;
+}
+
+.lightbox-btn {
+    border: none;
+    background: none;
+    color: #901C1C;
+    font-weight: bold;
+    font-size: 48px;
+    cursor: pointer;
+}
+
+.lightbox-close {
+    float: right;
+}
+
+.lightbox-content {
+    width: fit-content
+}
+
+.img-text {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+
+    color: #911C1C;
+}
+
+.lightbox-container {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 15%;
+    top: 20%;
 }

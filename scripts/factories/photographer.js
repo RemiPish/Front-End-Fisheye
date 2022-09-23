@@ -57,8 +57,7 @@ class photographer {
 
         const anchor = document.createElement('a');
         anchor.setAttribute("href", `/photographer.html?id=${this.id}`);
-        anchor.setAttribute("target", '_blank');
-        anchor.ariaLabel = `Aller sur la page de : ${name}`;
+        anchor.ariaLabel = `Aller sur la page de : ${this.name}`;
 
         const img = document.createElement('img');
         img.setAttribute("src", this.picture);

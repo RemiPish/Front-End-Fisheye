@@ -2,6 +2,7 @@ class video extends photographerMedia {
     constructor(data, name) {
         super(data);
         this.src = `assets/photographers/${name}/${data['video']}`
+        this.type = 'video';
 
     }
 
