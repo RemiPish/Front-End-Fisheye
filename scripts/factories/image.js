@@ -5,6 +5,20 @@ class image extends photographerMedia {
         this.type = 'image';
     }
 
+    showMediaInLightbox() {
+        
+        const mediaTitle = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = this.src;
+        mediaTitle.className = "img-text";
+        mediaTitle.textContent = this.mediaName;
+        lightboxImg.innerHTML = "";
+        lightboxImg.appendChild(img);
+        lightboxImg.appendChild(mediaTitle);
+    }
+
+    
+
     render() {
 
         const article = document.createElement('article');
@@ -19,6 +33,9 @@ class image extends photographerMedia {
         article.appendChild(media);
 
         this.renderMedia(article);
+        this.listenLightboxMedia(media);
         return (article);
     }
+
+
 }

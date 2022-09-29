@@ -5,6 +5,9 @@ let photographerClass;
 let medias = [];
 let selectedMediaID = "";
 const lightboxContainer = document.querySelector(".lightbox-container");
+const lightboxImg = document.querySelector(".lightbox-img");
+const prevMediaBtn = document.querySelector('.lightbox-prev');
+const nextMediaBtn = document.querySelector('.lightbox-next');
 
 let sortType = "popularite";
 
@@ -123,98 +126,42 @@ function countTotal() {
     })
 }
 
-function listenLightbox(medias) {
-    const lightbox = document.querySelector(".lightbox-img");
-    const mediaList = document.querySelectorAll('.media');
-    const prevBtn = document.querySelector('.lightbox-prev');
-    const nextBtn = document.querySelector('.lightbox-next');
-    const closeBtn = document.querySelector('.lightbox-close');
-    const mediaTitle = document.createElement('div');
-    mediaList.forEach(media => {
-        media.addEventListener('click', () => {
-            lightboxContainer.style.display = "block";
-            this.selectedMediaID = String(media.parentNode.getAttribute('data-id'));
-            //console.log(media.nodeName);
-            //console.log(media.parentNode.getAttribute('data-id'));
-            const img = document.createElement('img');
-            img.src = media.src;
-            mediaTitle.className = "img-text";
-            mediaTitle.textContent = media.getAttribute('alt');
-            lightbox.innerHTML = "";
-            lightbox.appendChild(img);
-            lightbox.appendChild(mediaTitle);
-            prevBtn.style.visibility = "visible";
-            nextBtn.style.visibility = "visible";
-            prevBtn.disabled = false;
-            nextBtn.disabled = false;
-            if (this.selectedMediaID === String(medias[0]['id'])) {
-                prevBtn.style.visibility = "hidden";
-                prevBtn.disabled = true;
-            }
-            if (this.selectedMediaID === String(medias[medias.length - 1]['id'])) {
-                nextBtn.style.visibility = "hidden";
-                nextBtn.disabled = true;
-            }
-        })
-    })
-    prevBtn.addEventListener('click', () => {
-        let previousMediaIndex = medias.map((elt => String(elt.id))).indexOf(this.selectedMediaID) - 1;
-        let mediaType = medias[previousMediaIndex]['type'];
-        this.selectedMediaID = String(medias[previousMediaIndex]['id'])
-        switch (mediaType) {
-            case 'image':
-                const img = document.createElement('img');
-                img.src = medias[previousMediaIndex].src
-                lightbox.innerHTML = "";
-                lightbox.appendChild(img);
-                break;
+function openLightbox(mediaElt) {
+    lightboxContainer.style.display = "block";
+    selectedMediaID = mediaElt.id;
+    checkLightboxArrows(mediaElt);
+}
 
-        }
-        mediaTitle.className = "img-text";
-        mediaTitle.textContent = medias[previousMediaIndex]['mediaName'];
-        lightbox.appendChild(mediaTitle);
-        prevBtn.style.visibility = "visible";
-        nextBtn.style.visibility = "visible";
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        if (this.selectedMediaID === String(medias[0]['id'])) {
-            prevBtn.style.visibility = "hidden";
-            prevBtn.disabled = true;
-        }
-        if (this.selectedMediaID === String(medias[medias.length - 1]['id'])) {
-            nextBtn.style.visibility = "hidden";
-            nextBtn.disabled = true;
-        }
+function listenLightbox() {
+    prevMediaBtn.addEventListener('click', () => {
+        let previousMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) - 1;
+        medias[previousMediaIndex].showMediaInLightbox();
+        selectedMediaID = medias[previousMediaIndex].id;
+        checkLightboxArrows(medias[previousMediaIndex]);
+
     })
 
-    nextBtn.addEventListener('click', () => {
-        let nextMediaIndex = medias.map((elt => String(elt.id))).indexOf(this.selectedMediaID) + 1;
-        let mediaType = medias[nextMediaIndex]['type'];
-        this.selectedMediaID = String(medias[nextMediaIndex]['id'])
-        switch (mediaType) {
-            case 'image':
-                const img = document.createElement('img');
-                img.src = medias[nextMediaIndex].src
-                lightbox.innerHTML = "";
-                lightbox.appendChild(img);
-                break;
-        }
-        mediaTitle.className = "img-text";
-        mediaTitle.textContent = medias[nextMediaIndex]['mediaName'];
-        lightbox.appendChild(mediaTitle);
-        prevBtn.style.visibility = "visible";
-        nextBtn.style.visibility = "visible";
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
-        if (this.selectedMediaID === String(medias[0]['id'])) {
-            prevBtn.style.visibility = "hidden";
-            prevBtn.disabled = true;
-        }
-        if (this.selectedMediaID === String(medias[medias.length - 1]['id'])) {
-            nextBtn.style.visibility = "hidden";
-            nextBtn.disabled = true;
-        }
+    nextMediaBtn.addEventListener('click', () => {
+        let nextMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) + 1;
+        medias[nextMediaIndex].showMediaInLightbox();
+        selectedMediaID = medias[nextMediaIndex].id;
+        checkLightboxArrows(medias[nextMediaIndex]);
     })
+}
+
+function checkLightboxArrows(mediaElt){
+    prevMediaBtn.style.visibility = "visible";
+    nextMediaBtn.style.visibility = "visible";
+    prevMediaBtn.disabled = false;
+    nextMediaBtn.disabled = false;
+    if (mediaElt === medias[0]) {
+        prevMediaBtn.style.visibility = "hidden";
+        prevMediaBtn.disabled = true;
+    }
+    if (mediaElt === medias[medias.length - 1]) {
+        nextMediaBtn.style.visibility = "hidden";
+        nextMediaBtn.disabled = true;
+    }
 }
 
 function closeLightbox() {

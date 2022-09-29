@@ -22,6 +22,13 @@ class photographerMedia {
             this.dom.likeNumber.textContent = this.mediaLikes;
     }
 
+    listenLightboxMedia(element) {
+        element.addEventListener('click', () => {
+            openLightbox(this);
+            this.showMediaInLightbox();
+        })
+    }
+
     renderMedia(article)
     {
         const name = document.createElement('label');
@@ -54,8 +61,9 @@ class photographerMedia {
             likeButton: likeButton,
             likeNumber: likeNumber
         }
-    }
+    }  
 }
+
 
 
 

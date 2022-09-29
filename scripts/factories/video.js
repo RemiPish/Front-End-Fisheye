@@ -6,6 +6,29 @@ class video extends photographerMedia {
 
     }
 
+    showMediaInLightbox() {
+        
+        const mediaTitle = document.createElement('div');
+
+        let video = document.createElement('video');
+        video.setAttribute("width", "900");
+        video.setAttribute("height", "600");
+        video.setAttribute("controls", "true");
+
+        let videoSource = document.createElement('source');
+        videoSource.setAttribute("src", this.src);
+        videoSource.setAttribute("type", "video/mp4");
+
+        video.appendChild(videoSource);
+        video.className += "media";
+
+        mediaTitle.className = "video-text";
+        mediaTitle.textContent = this.mediaName;
+        lightboxImg.innerHTML = "";
+        lightboxImg.appendChild(video);
+        lightboxImg.appendChild(mediaTitle);
+    }
+
     render() {
 
         const article = document.createElement('article');
@@ -13,7 +36,6 @@ class video extends photographerMedia {
         let media = document.createElement('video');
         media.setAttribute("width", "350");
         media.setAttribute("width", "300");
-        media.setAttribute("controls", "true");
 
         let videoSource = document.createElement('source');
         videoSource.setAttribute("src", this.src);
@@ -24,6 +46,7 @@ class video extends photographerMedia {
 
         article.appendChild(media);
         this.renderMedia(article);
+        this.listenLightboxMedia(media);
         return (article);
     }
 }
