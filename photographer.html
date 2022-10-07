@@ -20,7 +20,7 @@
     <div class="totalLikes-price"></div>
     <div class="sort-div">
       <span>
-        <label for="sort-select">Trier par </label>
+        <label class="sort-label" for="sort-select">Trier par </label>
         <select id="sort-select">
           <option value="popularite">Popularité</option>
           <option value="date">Date</option>
@@ -33,17 +33,17 @@
 
     <div class="lightbox-container">
       <div class="lightbox-content">
-        <button class="lightbox-close lightbox-btn" onclick="closeLightbox()">X</button>
+        <button aria-label="Fermer la modale de l'image selectionnée" class="lightbox-close lightbox-btn" onclick="closeLightbox()">X</button>
         <div class="lightbox">
-         
+
           <div class="lightbox-div">
-            <button class="lightbox-prev lightbox-btn" >&lt;</button>
+            <button aria-label="Aller vers l'image précédante" class="lightbox-prev lightbox-btn">&lt;</button>
           </div>
 
           <div class="lightbox-div lightbox-img">
           </div>
           <div class="lightbox-div">
-            <button class="lightbox-next lightbox-btn">&gt;<i class="fa-solid fa-more-than"></i> </button>
+            <button aria-label="Aller vers l'image suivante" class="lightbox-next lightbox-btn">&gt;<i class="fa-solid fa-more-than"></i> </button>
           </div>
 
         </div>
@@ -53,32 +53,41 @@
 
 
   <div id="contact_modal">
-    <div>
-      <header>
-        <h1>Contactez-moi</h1>
-        <span class="close-btn" onclick="closeModal()">X</span>
-      </header>
+    <div class="form">
+      <div class="form-header">
+        <div class="form-header-text">
+          <div class="form-title">Contactez-moi</div>
+          <div class="form-photographerName"></div>
+        </div>
+        <div aria-label="Fermer la modale du formulaire Contactez-moi" class="close-btn" onclick="closeModal()">X</div>
+      </div>
+
+      <div id="successModal">
+        <div class="success-msg">Votre message a été envoyé!</div>
+        <div>
+          <input aria-label="Fermer la modale du formulaire Contactez-moi" type="button"
+            class="btn-submit button fermer-btn" value="Fermer" />
+        </div>
+      </div>
+
       <form name="contact" action="" method="get">
         <div class="formData">
-          <label for="first">Prénom</label><br />
+          <label aria-labelledby="votre prenom" for="first">Prénom</label>
           <input class="text-control" type="text" id="first" name="first" minlength="2" data-error=""
-            data-error-visible="false" /><br />
+            data-error-visible="false" />
         </div>
         <div class="formData">
-          <label for="last">Nom</label><br />
-          <input class="text-control" type="text" id="last" name="last" data-error=""
-            data-error-visible="false" /><br />
+          <label aria-labelledby="Votre nom" for="last">Nom</label>
+          <input class="text-control" type="text" id="last" name="last" data-error="" data-error-visible="false" />
         </div>
         <div class="formData">
-          <label for="email">E-mail</label><br />
-          <input class="text-control" type="email" id="email" name="email" data-error=""
-            data-error-visible="false" /><br />
+          <label aria-labelledby="adresse mail" for="email">E-mail</label>
+          <input class="text-control" type="email" id="email" name="email" data-error="" data-error-visible="false" />
         </div>
         <div class="formData">
-          <label for="message">Votre message</label><br />
-          <textarea class="text-control" name="textarea" rows="10" cols="51" id="message" name="message" data-error=""
+          <label aria-labelledby="Votre message" for="message">Votre message</label>
+          <textarea class="text-control" name="textarea" id="message" name="message" data-error=""
             data-error-visible="false"></textarea>
-          <br />
         </div>
         <input class="btn-submit button" type="submit" value="Envoyer" id="btn-submit" />
       </form>

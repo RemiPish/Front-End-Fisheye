@@ -6,7 +6,7 @@ class image extends photographerMedia {
     }
 
     showMediaInLightbox() {
-        
+
         const mediaTitle = document.createElement('div');
         const img = document.createElement('img');
         img.src = this.src;
@@ -16,8 +16,6 @@ class image extends photographerMedia {
         lightboxImg.appendChild(img);
         lightboxImg.appendChild(mediaTitle);
     }
-
-    
 
     render() {
 

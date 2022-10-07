@@ -8,6 +8,7 @@ const lightboxContainer = document.querySelector(".lightbox-container");
 const lightboxImg = document.querySelector(".lightbox-img");
 const prevMediaBtn = document.querySelector('.lightbox-prev');
 const nextMediaBtn = document.querySelector('.lightbox-next');
+let isLightboxOpen = false;
 
 let sortType = "popularite";
 
@@ -25,7 +26,7 @@ async function displayPhotographer() {
 
     const photographersSection = document.querySelector(".photograph-header");
     photographersSection.appendChild(photographerClass.renderPhotographer());
-};
+}
 
 function displayTotalCount(photographerClass) {
 
@@ -52,6 +53,7 @@ function displayTotalCount(photographerClass) {
 }
 
 async function init() {
+    isLightboxOpen = false;
     photographers = await getPhotographers();
     displayPhotographer();
     hydrate([...photographers.media]);
@@ -69,10 +71,9 @@ async function init() {
         sortType = sortDropdown.value;
         display(medias);
         listen(medias);
-        listenLightbox(medias);
     })
 
-};
+}
 
 function hydrate(mediaList) {
     let id = getPhotographerID();
@@ -127,9 +128,11 @@ function countTotal() {
 }
 
 function openLightbox(mediaElt) {
+    isLightboxOpen = true;
     lightboxContainer.style.display = "block";
     selectedMediaID = mediaElt.id;
     checkLightboxArrows(mediaElt);
+
 }
 
 function listenLightbox() {
@@ -149,7 +152,7 @@ function listenLightbox() {
     })
 }
 
-function checkLightboxArrows(mediaElt){
+function checkLightboxArrows(mediaElt) {
     prevMediaBtn.style.visibility = "visible";
     nextMediaBtn.style.visibility = "visible";
     prevMediaBtn.disabled = false;
@@ -165,8 +168,32 @@ function checkLightboxArrows(mediaElt){
 }
 
 function closeLightbox() {
+    isLightboxOpen = false;
     lightboxContainer.style.display = "none";
 }
 
 
 init();
+document.onkeydown = function (e) {
+    if (isLightboxOpen) {
+        switch (e.code) {
+            case 'ArrowLeft':
+                if (selectedMediaID != medias[0].id) {
+                    let previousMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) - 1;
+                    medias[previousMediaIndex].showMediaInLightbox();
+                    selectedMediaID = medias[previousMediaIndex].id;
+                    checkLightboxArrows(medias[previousMediaIndex]);
+                }
+                break;
+            case 'ArrowRight':
+                if (selectedMediaID != medias[medias.length - 1].id) {
+                    let nextMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) + 1;
+                    medias[nextMediaIndex].showMediaInLightbox();
+                    selectedMediaID = medias[nextMediaIndex].id;
+                    checkLightboxArrows(medias[nextMediaIndex]);
+                }
+                break;
+
+        }
+    }
+};

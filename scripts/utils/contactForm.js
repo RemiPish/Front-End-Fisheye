@@ -1,12 +1,15 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
+    document.querySelector(".form-photographerName").textContent = photographerName;
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
+//modal du succes apres le formulaire valide
+const successModal = document.getElementById("successModal");
 
 //formulaire champ prenom
 const first = document.getElementById("first");
@@ -21,6 +24,8 @@ const message = document.getElementById("message");
 const submitButton = document.getElementById("btn-submit");
 const form = document.querySelector("form");
 
+const fermerButton = document.querySelector(".fermer-btn");
+fermerButton.addEventListener("click", closeModal);
 
 //fonctions ecoutant les changements input et blur sur les champs du formulaire pour valider, affiche ou cache le message d'erreur
 first.addEventListener("input", () => {
@@ -49,9 +54,12 @@ message.addEventListener("input", () => {
 
 //lors qu'on reussit a soumettre un formulaire valide, le modal de succes s'affiche
 form.addEventListener("submit", (e) => {
-    console.log(` Nom: ${last.value},\n Prénom: ${first.value},\n Email: ${email.value},\n Message: ${message.value},\n` )
+    console.log(` Nom: ${last.value},\n Prénom: ${first.value},\n Email: ${email.value},\n Message: ${message.value},\n`)
     e.preventDefault();
-    
+    form.style.display = "none";
+    successModal.style.display = "flex";
+    successModal.style.visibility = "visible";
+
 });
 
 //message erreur
@@ -106,11 +114,11 @@ function validate() {
 function showError(form, message) {
     form.parentElement.dataset.errorVisible = "true";
     form.parentElement.dataset.error = message;
-  }
-  
-  //cache les messages d'erreurs 
-  function hideError(form) {
+}
+
+//cache les messages d'erreurs 
+function hideError(form) {
     form.parentElement.dataset.errorVisible = "false";
-  }
+}
 
 validate();

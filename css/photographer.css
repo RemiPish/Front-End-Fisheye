@@ -1,11 +1,15 @@
+#main {
+    margin: 0 100px;
+}
+
 #contact_modal {
     display: none;
     position: fixed;
     z-index: 100;
     left: 22%;
-    top: 20%;
-    height: 669px;
-    width: 900px;
+    top: 0;
+    width: 669px;
+    height: 900px;
     background: #DB8876;
     border-radius: 5px;
     overflow: auto;
@@ -15,7 +19,7 @@
     display: flex;
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin-bottom: 20px;
 }
 
 .photograph-header article {
@@ -31,9 +35,6 @@
     margin: auto 50px;
     border-radius: 50%;
 }
-
-
-
 
 .contact_button {
     font-size: 20px;
@@ -84,15 +85,13 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 22px;
 }
 
 form div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
 }
 
 form input {
@@ -106,18 +105,17 @@ form input {
     margin-left: 50px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }
 
 .photographer-info h2 {
     font-style: normal;
     font-weight: 400;
-    font-size: 36px;
+    font-size: 64px;
     line-height: 47px;
 
 
     color: #D3573C;
-    margin-bottom: 0;
+    margin-bottom: 16px;
 }
 
 
@@ -128,7 +126,7 @@ form input {
     line-height: 31px;
 
 
-
+    margin-bottom: 19px;
     color: #901C1C;
 }
 
@@ -150,8 +148,7 @@ form input {
 .media-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin: 50px;
+    gap: 30px 95px;
 }
 
 .media-list article {
@@ -163,6 +160,7 @@ form input {
     display: flex;
     width: 350px;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 .mediaName,
@@ -220,22 +218,22 @@ i,
 
 .close-btn {
     color: white;
-    font-size: 30px;
+    font-size: 64px;
     font-weight: 500;
 }
 
 .text-control {
     margin: 0;
-    padding: 8px;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 20px;
-    height: 48px;
+    height: 68px;
+    padding: 0;
 }
 
 .formData[data-error]::after {
     content: attr(data-error);
-    font-size: 0.4em;
+    font-size: 1em;
     color: #e54858;
     display: block;
     margin-top: 7px;
@@ -257,6 +255,7 @@ i,
 .lightbox,
 .lightbox-div {
     display: flex;
+    justify-content: center;
 }
 
 .lightbox-div {
@@ -264,9 +263,14 @@ i,
     justify-content: center;
 }
 
+.lightbox-img {
+    margin: 35px 0;
+}
+
 .lightbox-img img {
-    width: 70vw;
-    height: 70vh;
+    width: 100%;
+    height: 80vh;
+    margin-bottom: 12px;
 }
 
 .lightbox-btn {
@@ -280,10 +284,17 @@ i,
 
 .lightbox-close {
     float: right;
+    position: absolute;
+    top: 0;
+    right: 20px;
 }
 
 .lightbox-content {
-    width: fit-content
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .img-text {
@@ -300,6 +311,93 @@ i,
     display: none;
     position: fixed;
     z-index: 100;
-    left: 15%;
-    top: 20%;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+}
+
+.sort-label {
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 25px;
+}
+
+#sort-select,
+#sort-select * {
+    width: 170px;
+    height: 60px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#sort-select {
+    background: #911C1C;
+    border-radius: 5px;
+    margin-bottom: 58px;
+}
+
+.form-title,
+.form-photographerName {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 83px;
+
+    color: #000000;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.form {
+    margin: 35px;
+}
+
+.btn-submit {
+    width: 170px;
+    height: 69px;
+    background: #911C1C;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+    margin-top: 26px;
+}
+
+textarea {
+    height: 170px !important;
+}
+
+#successModal {
+    visibility: hidden;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+}
+
+.success-msg {
+    font-size: 36px;
+    text-align: center;
+}
+
+.fermer-btn {
+    align-content: center;
+    position: relative;
+    bottom: -200px;
 }
