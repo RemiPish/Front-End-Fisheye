@@ -32,8 +32,22 @@ h1 {
     margin: 50px;
 }
 
+@media screen and (min-width: 800px) {
+    .photographer_section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 660px) {
+    .photographer_section {
+        grid-template-columns: 1fr;
+        margin: 20px;
+    }
+}
+
 .photographer_section article {
     padding: 15px;
+    border: 1px solid transparent;
 }
 
 .photographer_section article:hover {
@@ -69,6 +83,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
+    object-fit: cover;
 
 }
 
@@ -77,10 +92,9 @@ h1 {
     font-weight: 400;
     font-size: 13px;
     line-height: 17px;
-
     text-align: center;
-
     color: #901C1C;
+    margin-bottom: 3px;
 }
 
 .photographer_section article .tagline {
@@ -88,8 +102,7 @@ h1 {
     font-weight: 400;
     font-size: 10px;
     line-height: 13px;
-    /* identical to box height */
-
+    margin-bottom: 3px;
     text-align: center;
     color: #000;
 }

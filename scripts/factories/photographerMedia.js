@@ -11,11 +11,11 @@ class photographerMedia {
 
     toggleLikes() {
             if(this.mediaLiked){
-                this.dom.likeButton.classList.replace("fa-heart", "fa-heart-o");
+                this.dom.likeButtonIcon.classList.replace("fa-heart", "fa-heart-o");
                 this.mediaLikes--;
             }
             else {
-                this.dom.likeButton.classList.replace("fa-heart-o", "fa-heart");
+                this.dom.likeButtonIcon.classList.replace("fa-heart-o", "fa-heart");
                 this.mediaLikes++;
             }
             this.mediaLiked = !this.mediaLiked;
@@ -39,10 +39,15 @@ class photographerMedia {
         const likeNumber = document.createElement('span');
         likeNumber.textContent = this.mediaLikes;
         likeNumber.className += "likeNumber";
+        likeNumber.setAttribute('aria-labelledby', "Nombre de like");
 
+        const likeButton = document.createElement('button');
+        likeButton.className += "likeButton";
+        likeButton.setAttribute('aria-label', "Liker la photo");
+        likeButton.setAttribute('role', "button");
 
-        const likeButton = document.createElement('i');
-        likeButton.className += "fa fa-heart-o "
+        const likeButtonIcon = document.createElement('i');
+        likeButtonIcon.className += "fa fa-heart-o "
 
         const divText = document.createElement('div');
         divText.className += "media-text";
@@ -50,6 +55,7 @@ class photographerMedia {
         const divLike = document.createElement('div');
         divLike.className += "media-like";
 
+        likeButton.appendChild(likeButtonIcon);
         article.appendChild(divText);
         divText.appendChild(name);
         divText.appendChild(divLike);
@@ -59,6 +65,7 @@ class photographerMedia {
         this.dom = {
             article: article,
             likeButton: likeButton,
+            likeButtonIcon: likeButtonIcon,
             likeNumber: likeNumber
         }
     }  

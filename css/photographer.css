@@ -1,5 +1,6 @@
-#main {
+.photographer-page {
     margin: 0 100px;
+    padding-bottom: 150px;
 }
 
 #contact_modal {
@@ -7,9 +8,9 @@
     position: fixed;
     z-index: 100;
     left: 22%;
-    top: 0;
-    width: 669px;
-    height: 900px;
+    top: 2%;
+    width: 65vw;
+    height: 95vh;
     background: #DB8876;
     border-radius: 5px;
     overflow: auto;
@@ -34,6 +35,7 @@
     width: 200px;
     margin: auto 50px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .contact_button {
@@ -111,7 +113,7 @@ form input {
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
-    line-height: 47px;
+    line-height: 60px;
 
 
     color: #D3573C;
@@ -119,18 +121,16 @@ form input {
 }
 
 
-.location {
+.photographer-info .location {
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 31px;
-
-
     margin-bottom: 19px;
     color: #901C1C;
 }
 
-.tagline {
+.photographer-info .tagline {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -140,20 +140,25 @@ form input {
 }
 
 .media {
-    width: 350px;
+    max-width: 350px;
+    width: 100%;
+    object-fit: cover;
     height: 300px;
 }
 
 
 .media-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px 95px;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
 .media-list article {
     display: flex;
     flex-direction: column;
+    margin: 1.5rem;
 }
 
 .media-text {
@@ -163,8 +168,19 @@ form input {
     margin-top: 10px;
 }
 
+.likeButton,
+.close-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.likeButton .fa {
+    color: #911C1C;
+    font-size: 24px;
+    text-align: center;
+}
+
 .mediaName,
-i,
 .likeNumber {
     font-style: normal;
     font-weight: 400;
@@ -211,8 +227,8 @@ i,
     gap: 10px;
 }
 
-.totalLikes,
-.price {
+.totalLikes-price .totalLikes,
+.totalLikes-price .price {
     margin: 30px;
 }
 
@@ -233,8 +249,8 @@ i,
 
 .formData[data-error]::after {
     content: attr(data-error);
-    font-size: 1em;
-    color: #e54858;
+    font-size: 1.2em;
+    color: white;
     display: block;
     margin-top: 7px;
     margin-bottom: 7px;
@@ -256,6 +272,7 @@ i,
 .lightbox-div {
     display: flex;
     justify-content: center;
+    min-height: 80vh;
 }
 
 .lightbox-div {
@@ -268,9 +285,11 @@ i,
 }
 
 .lightbox-img img {
-    width: 100%;
-    height: 80vh;
-    margin-bottom: 12px;
+    max-width: 80vw;
+    max-height: 80vh;
+    margin: auto;
+    border-radius: 0.6rem;
+    object-fit: cover;
 }
 
 .lightbox-btn {

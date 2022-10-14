@@ -10,6 +10,7 @@ class video extends photographerMedia {
         
         const mediaTitle = document.createElement('div');
 
+        
         let video = document.createElement('video');
         video.setAttribute("width", "900");
         video.setAttribute("height", "600");
@@ -37,14 +38,20 @@ class video extends photographerMedia {
         media.setAttribute("width", "350");
         media.setAttribute("height", "300");
 
+        let anchor =  document.createElement('a');
+        anchor.setAttribute('aria-describedby', "ouvrir la video en grand sur le lightbox");
+        anchor.setAttribute('role', "button");
+        anchor.setAttribute('href', "#");
         let videoSource = document.createElement('source');
         videoSource.setAttribute("src", this.src);
         videoSource.setAttribute("type", "video/mp4");
 
+        
         media.appendChild(videoSource);
         media.className += "media";
 
-        article.appendChild(media);
+        anchor.appendChild(media)
+        article.appendChild(anchor);
         this.renderMedia(article);
         this.listenLightboxMedia(media);
         return (article);

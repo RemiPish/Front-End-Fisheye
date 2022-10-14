@@ -65,6 +65,7 @@ async function init() {
 
     let contactBtn = document.querySelector(".contact_button");
     contactBtn.addEventListener("click", displayModal);
+    contactBtn.setAttribute('aria-label', "ouvrir la modale formulaire");
 
     let sortDropdown = document.getElementById("sort-select");
     sortDropdown.addEventListener("change", () => {

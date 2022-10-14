@@ -57,6 +57,7 @@ class photographer {
 
         const anchor = document.createElement('a');
         anchor.setAttribute("href", `/photographer.html?id=${this.id}`);
+        anchor.setAttribute("aria-describedby",  `Aller sur la page de : ${this.name}`);
         anchor.ariaLabel = `Aller sur la page de : ${this.name}`;
 
         const img = document.createElement('img');

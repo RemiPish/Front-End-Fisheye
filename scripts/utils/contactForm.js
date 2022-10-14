@@ -2,6 +2,7 @@ function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
     document.querySelector(".form-photographerName").textContent = photographerName;
+    first.focus();
 }
 
 function closeModal() {
