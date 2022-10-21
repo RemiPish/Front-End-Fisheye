@@ -1,11 +1,17 @@
+import photographer from "../factories/photographer.js";
+import { getPhotographers, getPhotographerID } from "../fetchData.js";
+import { displayModal } from "../utils/contactForm.js";
+import mediaFactory from "../factories/mediaFactory.js";
+import { photographers } from "./index.js";
+
 //Mettre le code JavaScript lié à la page photographer.html
-let photographerName = "";
+export let photographerName = "";
 let totalLikes = 0;
 let photographerClass;
 let medias = [];
 let selectedMediaID = "";
 const lightboxContainer = document.querySelector(".lightbox-container");
-const lightboxImg = document.querySelector(".lightbox-img");
+export const lightboxImg = document.querySelector(".lightbox-img");
 const prevMediaBtn = document.querySelector('.lightbox-prev');
 const nextMediaBtn = document.querySelector('.lightbox-next');
 let isLightboxOpen = false;
@@ -54,7 +60,7 @@ function displayTotalCount(photographerClass) {
 
 async function init() {
     isLightboxOpen = false;
-    photographers = await getPhotographers();
+    let photographers = await getPhotographers();
     displayPhotographer();
     hydrate([...photographers.media]);
     countTotal();
@@ -128,7 +134,7 @@ function countTotal() {
     })
 }
 
-function openLightbox(mediaElt) {
+export function openLightbox(mediaElt) {
     isLightboxOpen = true;
     lightboxContainer.style.display = "block";
     selectedMediaID = mediaElt.id;
@@ -168,9 +174,13 @@ function checkLightboxArrows(mediaElt) {
     }
 }
 
-function closeLightbox() {
+export function closeLightbox() {
     isLightboxOpen = false;
     lightboxContainer.style.display = "none";
+}
+
+export function showDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show");
 }
 
 
@@ -198,3 +208,17 @@ document.onkeydown = function (e) {
         }
     }
 };
+
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+

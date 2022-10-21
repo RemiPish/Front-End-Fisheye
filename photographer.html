@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -12,7 +12,7 @@
 
 <body>
   <header>
-    <a href="/" aria-labelledby="retour a la page index"><img src="assets/images/logo.png" class="logo" /></a>
+    <a href="/" aria-labelledby="retour a la page index"><img src="assets/images/logo.png" class="logo" alt="logo fisheye"/></a>
   </header>
 
   <main id="main">
@@ -22,11 +22,14 @@
       <div class="sort-div">
         <span>
           <label class="sort-label" for="sort-select">Trier par </label>
-          <select id="sort-select">
-            <option value="popularite">Popularité</option>
-            <option value="date">Date</option>
-            <option value="titre">Titre</option>
-          </select>
+          <div id="sort-select">
+            <button onclick="showDropdown()" class="dropbtn">  </button>
+            <div class="dropdown-content">
+              <a href="#">Popularité</a>
+              <a class="dropdown-middle"href="#">Date</a>
+              <a href="#">Titre</a>
+            </div>
+          </div>
         </span>
       </div>
 
@@ -34,7 +37,7 @@
 
       <div class="lightbox-container">
         <div class="lightbox-content">
-          <button aria-label="Fermer la modale de l'image selectionnée" class="lightbox-close lightbox-btn"
+          <button tabIndex=0 aria-label="Fermer la modale de l'image selectionnée" class="lightbox-close lightbox-btn"
             onclick="closeLightbox()">X</button>
           <div class="lightbox">
 
@@ -98,16 +101,16 @@
           id="btn-submit" />
 
     </div>
-    <script src="scripts/fetchData.js"></script>
-    <script src="scripts/factories/photographer.js"></script>
-    <script src="scripts/factories/photographerMedia.js"></script>
-    <script src="scripts/factories/image.js"></script>
-    <script src="scripts/factories/video.js"></script>
-    <script src="scripts/factories/mediaFactory.js"></script>
+    <script type="module" src="scripts/fetchData.js"></script>
+    <script type="module" src="scripts/factories/photographer.js"></script>
+    <script type="module" src="scripts/factories/photographerMedia.js"></script>
+    <script type="module" src="scripts/factories/image.js"></script>
+    <script type="module" src="scripts/factories/video.js"></script>
+    <script type="module" src="scripts/factories/mediaFactory.js"></script>
 
 
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script type="module" src="/scripts/pages/photographer.js"></script>
+    <script type="module" src="/scripts/utils/contactForm.js"></script>
 </body>
 
 </html>

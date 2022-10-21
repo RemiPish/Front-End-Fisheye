@@ -1,4 +1,6 @@
-function displayModal() {
+import { photographerName } from "../pages/photographer.js";
+
+export function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
     document.querySelector(".form-photographerName").textContent = photographerName;

@@ -1,3 +1,5 @@
+import photographerMedia from "./photographerMedia.js";
+import { lightboxImg } from "../pages/photographer.js";
 class image extends photographerMedia {
     constructor(data, name) {
         super(data);
@@ -43,3 +45,4 @@ class image extends photographerMedia {
 
 
 }
+export default image;

@@ -1,4 +1,5 @@
-class photographerMedia {
+import { openLightbox } from "../pages/photographer.js";
+export default class photographerMedia {
 
     constructor(media) {
         this.mediaName = media['title'];
@@ -10,27 +11,26 @@ class photographerMedia {
     }
 
     toggleLikes() {
-            if(this.mediaLiked){
-                this.dom.likeButtonIcon.classList.replace("fa-heart", "fa-heart-o");
-                this.mediaLikes--;
-            }
-            else {
-                this.dom.likeButtonIcon.classList.replace("fa-heart-o", "fa-heart");
-                this.mediaLikes++;
-            }
-            this.mediaLiked = !this.mediaLiked;
-            this.dom.likeNumber.textContent = this.mediaLikes;
+        if (this.mediaLiked) {
+            this.dom.likeButtonIcon.classList.replace("fa-heart", "fa-heart-o");
+            this.mediaLikes--;
+        }
+        else {
+            this.dom.likeButtonIcon.classList.replace("fa-heart-o", "fa-heart");
+            this.mediaLikes++;
+        }
+        this.mediaLiked = !this.mediaLiked;
+        this.dom.likeNumber.textContent = this.mediaLikes;
     }
 
     listenLightboxMedia(element) {
-        element.addEventListener('click', () => {
+        element.closest('a').addEventListener('click', () => {
             openLightbox(this);
             this.showMediaInLightbox();
         })
     }
 
-    renderMedia(article)
-    {
+    renderMedia(article) {
         const name = document.createElement('label');
         name.setAttribute("for", "media");
         name.textContent = this.mediaName;
@@ -68,7 +68,7 @@ class photographerMedia {
             likeButtonIcon: likeButtonIcon,
             likeNumber: likeNumber
         }
-    }  
+    }
 }
 
 

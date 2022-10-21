@@ -16,26 +16,17 @@
     overflow: auto;
 }
 
-.photograph-header {
-    display: flex;
-    background-color: #FAFAFA;
-    height: 300px;
-    margin-bottom: 20px;
-}
-
 .photograph-header article {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
+    background-color: #FAFAFA;
     align-items: center;
-}
-
-.photograph-header article img {
-    height: 200px;
-    width: 200px;
-    margin: auto 50px;
-    border-radius: 50%;
-    object-fit: cover;
+    gap: 15px;
+    min-width: 800px;
+    margin-bottom: 20px;
+    height: 300px;
 }
 
 .contact_button {
@@ -49,6 +40,11 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.contact_button:hover {
+    background-color: #D3573C;
+    color: black;
 }
 
 .modal {
@@ -146,6 +142,10 @@ form input {
     height: 300px;
 }
 
+.media:hover {
+    opacity: 0.4;
+}
+
 
 .media-list {
     display: flex;
@@ -172,6 +172,7 @@ form input {
 .close-btn {
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .likeButton .fa {
@@ -344,21 +345,72 @@ form input {
     margin-right: 25px;
 }
 
-#sort-select,
-#sort-select * {
+/* Dropdown Button */
+.dropbtn {
+    background-color: #911C1C;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
     width: 170px;
     height: 60px;
     font-weight: 700;
     font-size: 18px;
-    line-height: 23px;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-#sort-select {
-    background: #911C1C;
     border-radius: 5px;
     margin-bottom: 58px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #D3573C;
+}
+
+/* The container <div> - needed to position the dropdown content */
+#sort-select {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    background: #911C1C;
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 170px;
+    height: 60px;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-bottom: 58px;
+}
+
+.dropdown-middle::before {
+    width: 75%;
+    border-top: white 3px solid;
+    border-bottom: white 3px solid;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #D3573C;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
 }
 
 .form-title,
@@ -395,6 +447,17 @@ form input {
     line-height: 23px;
     text-align: center;
     margin-top: 26px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #D3573C;
+    color: black;
+}
+
+.btn-submit:disabled {
+    background: #290101;
+    color: #383636;
 }
 
 textarea {

@@ -1,4 +1,6 @@
-class video extends photographerMedia {
+import photographerMedia from "./photographerMedia.js";
+import { lightboxImg } from "../pages/photographer.js";
+export default class video extends photographerMedia {
     constructor(data, name) {
         super(data);
         this.src = `assets/photographers/${name}/${data['video']}`

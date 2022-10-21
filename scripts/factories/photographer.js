@@ -1,4 +1,4 @@
-class photographer {
+export default class photographer {
 
 
     constructor(data) {
@@ -14,7 +14,13 @@ class photographer {
     renderPhotographer() {
 
         const article = document.createElement('article');
+
+        const divImg= document.createElement('div');
+        divImg.className += "photographer-img";
+        divImg.setAttribute("tabIndex", "0");
+
         const img = document.createElement('img');
+        
         img.setAttribute("src", this.picture);
         img.setAttribute("alt", `La photo du photographe ${this.name}`);
 
@@ -22,6 +28,7 @@ class photographer {
         const h2 = document.createElement('h2');
         h2.textContent = this.name;
         h2.ariaLabel = `Nom du photographe: ${this.name}`;
+        h2.setAttribute("tabIndex", "0");
 
         const divLocation = document.createElement('div');
         divLocation.textContent = this.location;
@@ -39,14 +46,16 @@ class photographer {
 
         const photographerInfo = document.createElement("div")
         photographerInfo.className += "photographer-info";
+        photographerInfo.setAttribute("tabIndex", "0");
 
         photographerInfo.appendChild(h2);
         photographerInfo.appendChild(divLocation);
         photographerInfo.appendChild(divTagline);
 
+        divImg.appendChild(img);
         article.appendChild(photographerInfo);
         article.appendChild(contactBtn);
-        article.appendChild(img)
+        article.appendChild(divImg)
 
 
         return (article);
@@ -60,6 +69,9 @@ class photographer {
         anchor.setAttribute("aria-describedby",  `Aller sur la page de : ${this.name}`);
         anchor.ariaLabel = `Aller sur la page de : ${this.name}`;
 
+        const divImg= document.createElement('div');
+        divImg.className += "photographer-img" 
+
         const img = document.createElement('img');
         img.setAttribute("src", this.picture);
         img.setAttribute("alt", `La photo du photographe ${this.name}`);
@@ -67,6 +79,9 @@ class photographer {
         const h2 = document.createElement('h2');
         h2.textContent = this.name;
         h2.ariaLabel = `Nom du photographe: ${this.name}`;
+
+        const divInfo =document.createElement('div');
+        divInfo.setAttribute("tabIndex", "0");
 
         const divLocation = document.createElement('div');
         divLocation.textContent = this.location;
@@ -86,11 +101,13 @@ class photographer {
 
 
         article.appendChild(anchor);
-        anchor.appendChild(img);
+        divImg.appendChild(img);
+        anchor.appendChild(divImg);
         anchor.appendChild(h2);
-        anchor.appendChild(divLocation);
-        anchor.appendChild(divTagline);
-        anchor.appendChild(divPrice);
+        anchor.appendChild(divInfo);
+        divInfo.appendChild(divLocation);
+        divInfo.appendChild(divTagline);
+        divInfo.appendChild(divPrice);
 
         return (article);
     }
