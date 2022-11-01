@@ -1,19 +1,18 @@
-import { photographers } from "./pages/index.js";
-export async function getPhotographers() {
+//fichier js contenant les fonctions qui permettent de recuperer les donnees des fichiers json
+
+//recupere les donnees depuis le fichier json
+export async function getData() {
     let path = '../../data/photographers.json';
     let res = await fetch(path);
-    let data = await res.json();
-    return data;
+    return await res.json();
 }
 
-
-export function getPhotographerID() {
-    let params = (new URL(document.location)).searchParams;
-    return params.get('id');
+//retourne les photographes depuis les données recuperees
+export function getPhotographers(data) {
+    return [...data.photographers];
 }
 
-
-export function getPhotographerByID(id) {
-    let photographer = photographers.filter(elt => parseInt(id) === elt.id);
-    return photographer[0];
+//retourne les medias depuis les données recuperees
+export function getMedia(data) {
+    return [...data.media];
 }

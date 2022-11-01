@@ -7,7 +7,7 @@ export function displayModal() {
     first.focus();
 }
 
-function closeModal() {
+export function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
@@ -57,7 +57,6 @@ message.addEventListener("input", () => {
 
 //lors qu'on reussit a soumettre un formulaire valide, le modal de succes s'affiche
 form.addEventListener("submit", (e) => {
-    console.log(` Nom: ${last.value},\n Prénom: ${first.value},\n Email: ${email.value},\n Message: ${message.value},\n`)
     e.preventDefault();
     form.style.display = "none";
     successModal.style.display = "flex";

@@ -1,10 +1,9 @@
 import photographer from "../factories/photographer.js";
-import { getPhotographers, getPhotographerID } from "../fetchData.js";
+import { getData, getMedia, getPhotographers } from "../fetchData.js";
 import { displayModal } from "../utils/contactForm.js";
 import mediaFactory from "../factories/mediaFactory.js";
-import { photographers } from "./index.js";
 
-//Mettre le code JavaScript lié à la page photographer.html
+
 export let photographerName = "";
 let totalLikes = 0;
 let photographerClass;
@@ -15,18 +14,19 @@ export const lightboxImg = document.querySelector(".lightbox-img");
 const prevMediaBtn = document.querySelector('.lightbox-prev');
 const nextMediaBtn = document.querySelector('.lightbox-next');
 let isLightboxOpen = false;
-
 let sortType = "popularite";
 
-function getPhotographerByID(id) {
-    let photographerList = [...photographers.photographers];
-    let photographer = photographerList.filter(elt => parseInt(id) === elt.id);
+
+
+//retourne le photographe en fonction de son id
+function getPhotographerByID(photographers, id) {
+    let photographer = photographers.filter(elt => parseInt(id) === elt.id);
     return photographer[0];
 }
 
-async function displayPhotographer() {
-
-    const photographerData = getPhotographerByID(getPhotographerID());
+//affiche les info du photographe en fonction de son id
+function displayPhotographer(photographers, id) {
+    const photographerData = getPhotographerByID(photographers, id);
     photographerName = photographerData.name;
     photographerClass = new photographer(photographerData);
 
@@ -35,7 +35,6 @@ async function displayPhotographer() {
 }
 
 function displayTotalCount(photographerClass) {
-
     const totalLikesPriceSection = document.querySelector(".totalLikes-price");
 
     const totalLikesDiv = document.createElement('div');
@@ -58,32 +57,7 @@ function displayTotalCount(photographerClass) {
     totalLikesPriceSection.appendChild(price);
 }
 
-async function init() {
-    isLightboxOpen = false;
-    let photographers = await getPhotographers();
-    displayPhotographer();
-    hydrate([...photographers.media]);
-    countTotal();
-    displayTotalCount(photographerClass);
-    await display(medias);
-    listen(medias);
-    listenLightbox(medias);
-
-    let contactBtn = document.querySelector(".contact_button");
-    contactBtn.addEventListener("click", displayModal);
-    contactBtn.setAttribute('aria-label', "ouvrir la modale formulaire");
-
-    let sortDropdown = document.getElementById("sort-select");
-    sortDropdown.addEventListener("change", () => {
-        sortType = sortDropdown.value;
-        display(medias);
-        listen(medias);
-    })
-
-}
-
-function hydrate(mediaList) {
-    let id = getPhotographerID();
+function hydrate(mediaList, id) {
     let list = mediaList.filter(elt => {
         return id == elt.photographerId;
     });
@@ -93,21 +67,25 @@ function hydrate(mediaList) {
     })
 }
 
-async function display(medias) {
+function display(medias) {
     const mediaSection = document.querySelector(".media-list");
+    console.log(sortType)
     mediaSection.innerHTML = '';
 
     switch (sortType) {
         case 'popularite': {
             medias.sort((a, b) => a.mediaLikes > b.mediaLikes ? -1 : 1);
+            console.log("ZULUL");
         }
             break;
         case 'titre': {
             medias.sort((a, b) => a.mediaName > b.mediaName ? 1 : -1);
+            console.log("POG");
         }
             break;
         case 'date': {
             medias.sort((a, b) => a.mediaDate > b.mediaDate ? 1 : -1);
+            console.log("Pepepains");
         }
             break;
     }
@@ -157,6 +135,34 @@ function listenLightbox() {
         selectedMediaID = medias[nextMediaIndex].id;
         checkLightboxArrows(medias[nextMediaIndex]);
     })
+
+    const lightboxCloseButton = document.querySelector(".lightbox-close");
+    lightboxCloseButton.addEventListener("click", closeLightbox);
+
+    document.onkeydown = function (e) {
+        if (isLightboxOpen) {
+            switch (e.code) {
+                case 'ArrowLeft':
+                    if (selectedMediaID != medias[0].id) {
+                        let previousMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) - 1;
+                        medias[previousMediaIndex].showMediaInLightbox();
+                        selectedMediaID = medias[previousMediaIndex].id;
+                        checkLightboxArrows(medias[previousMediaIndex]);
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (selectedMediaID != medias[medias.length - 1].id) {
+                        let nextMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) + 1;
+                        medias[nextMediaIndex].showMediaInLightbox();
+                        selectedMediaID = medias[nextMediaIndex].id;
+                        checkLightboxArrows(medias[nextMediaIndex]);
+                    }
+                    break;
+
+            }
+        }
+    };
+
 }
 
 function checkLightboxArrows(mediaElt) {
@@ -183,42 +189,55 @@ export function showDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+function listenDropdown() {
+    document.getElementById('sort-select').addEventListener('click', function () {
+        this.querySelector('.select').classList.toggle('open');
+    })
+
+    for (const option of document.querySelectorAll(".dropdown-option")) {
+        option.addEventListener('click', function () {
+            let optionText = this.textContent;
+            let optionValue = this.dataset.value;
+            sortType = optionValue;
+            document.getElementById('sort-select').classList.add('open');
+            this.textContent = this.closest('.select').querySelector('.dropdown-btn span').textContent;
+            this.dataset.value = this.closest('.select').querySelector('.dropdown-btn span').dataset.value;
+            this.closest('.select').querySelector('.dropdown-btn span').textContent = optionText;
+            this.closest('.select').querySelector('.dropdown-btn span').dataset.value = optionValue;
+
+            display(medias);
+            listen(medias);
+        })
+    }
+    window.addEventListener('click', function (e) {
+        const select = document.querySelector('.select')
+        if (!select.contains(e.target)) {
+            select.classList.remove('open');
+        }
+    });
+}
+
+async function init() {
+    let id = (new URL(document.location)).searchParams.get('id');
+    isLightboxOpen = false;
+    let data = await getData();
+    displayPhotographer(getPhotographers(data), id);
+    let media = getMedia(data);
+    hydrate(media, id);
+    countTotal();
+    displayTotalCount(photographerClass);
+    await display(medias);
+    listen(medias);
+    listenLightbox(medias);
+
+    let contactBtn = document.querySelector(".contact_button");
+    contactBtn.addEventListener("click", displayModal);
+    contactBtn.setAttribute('aria-label', "ouvrir la modale formulaire");
+
+    listenDropdown();
+
+}
 
 init();
-document.onkeydown = function (e) {
-    if (isLightboxOpen) {
-        switch (e.code) {
-            case 'ArrowLeft':
-                if (selectedMediaID != medias[0].id) {
-                    let previousMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) - 1;
-                    medias[previousMediaIndex].showMediaInLightbox();
-                    selectedMediaID = medias[previousMediaIndex].id;
-                    checkLightboxArrows(medias[previousMediaIndex]);
-                }
-                break;
-            case 'ArrowRight':
-                if (selectedMediaID != medias[medias.length - 1].id) {
-                    let nextMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) + 1;
-                    medias[nextMediaIndex].showMediaInLightbox();
-                    selectedMediaID = medias[nextMediaIndex].id;
-                    checkLightboxArrows(medias[nextMediaIndex]);
-                }
-                break;
 
-        }
-    }
-};
-
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
 

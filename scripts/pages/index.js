@@ -1,9 +1,10 @@
 import photographer from "../factories/photographer.js";
+import { getData } from "../fetchData.js";
 import { getPhotographers } from "../fetchData.js";
 
-export let photographers;
 
-async function displayData(photographers) {
+// affiche les donnees recuperees des photographes
+async function displayPhotographersData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     photographers.forEach((elt) => {
         let person = new photographer(elt);
@@ -12,9 +13,9 @@ async function displayData(photographers) {
 }
 
 async function init() {
-    photographers = await getPhotographers();
-    let photographerList = [...photographers.photographers];
-    displayData(photographerList);
+    const data = await getData();
+    const photographers = getPhotographers(data);
+    displayPhotographersData(photographers);
 
 }
 

@@ -12,7 +12,8 @@
 
 <body>
   <header>
-    <a href="/" aria-labelledby="retour a la page index"><img src="assets/images/logo.png" class="logo" alt="logo fisheye"/></a>
+    <a href="/" aria-labelledby="retour a la page index"><img src="assets/images/logo.png" class="logo"
+        alt="logo fisheye" /></a>
   </header>
 
   <main id="main">
@@ -20,14 +21,18 @@
       <div class="photograph-header"></div>
       <div class="totalLikes-price"></div>
       <div class="sort-div">
-        <span>
-          <label class="sort-label" for="sort-select">Trier par </label>
-          <div id="sort-select">
-            <button onclick="showDropdown()" class="dropbtn">  </button>
+        <label class="sort-label" for="sort-select">Trier par </label>
+        <span id="sort-select">
+          <div class="select">
+            <div class="dropdown-btn">
+              <span data-value="popularite">Popularité</span>
+              <div class="arrowDown"></div>
+            </div>
             <div class="dropdown-content">
-              <a href="#">Popularité</a>
-              <a class="dropdown-middle"href="#">Date</a>
-              <a href="#">Titre</a>
+              <div class="line"></div>
+              <span class="dropdown-option" data-value="date">Date</span>
+              <div class="line"></div>
+              <span class="dropdown-option" data-value="titre">Titre</span>
             </div>
           </div>
         </span>
@@ -37,8 +42,8 @@
 
       <div class="lightbox-container">
         <div class="lightbox-content">
-          <button tabIndex=0 aria-label="Fermer la modale de l'image selectionnée" class="lightbox-close lightbox-btn"
-            onclick="closeLightbox()">X</button>
+          <button tabIndex=0 aria-label="Fermer la modale de l'image selectionnée"
+            class="lightbox-close lightbox-btn">X</button>
           <div class="lightbox">
 
             <div class="lightbox-div">
@@ -51,7 +56,6 @@
               <button aria-label="Aller vers l'image suivante" class="lightbox-next lightbox-btn">&gt;<i
                   class="fa-solid fa-more-than"></i> </button>
             </div>
-
           </div>
         </div>
       </div>
@@ -66,15 +70,14 @@
           <div class="form-title">Contactez-moi</div>
           <div class="form-photographerName"></div>
         </div>
-        <button aria-label="Fermer la modale du formulaire Contactez-moi" class="close-btn"
-          onclick="closeModal()">X</button>
+        <button aria-label="Fermer la modale du formulaire Contactez-moi" class="close-btn fermer-btn">X</button>
       </div>
 
       <div id="successModal">
         <div class="success-msg">Votre message a été envoyé!</div>
         <div>
           <input aria-label="Fermer la modale du formulaire Contactez-moi" type="button"
-            class="btn-submit button fermer-btn" value="Fermer" />
+            class="btn-submit button modalFermer-btn fermer-btn" value="Fermer" />
         </div>
       </div>
 
@@ -101,16 +104,8 @@
           id="btn-submit" />
 
     </div>
-    <script type="module" src="scripts/fetchData.js"></script>
-    <script type="module" src="scripts/factories/photographer.js"></script>
-    <script type="module" src="scripts/factories/photographerMedia.js"></script>
-    <script type="module" src="scripts/factories/image.js"></script>
-    <script type="module" src="scripts/factories/video.js"></script>
-    <script type="module" src="scripts/factories/mediaFactory.js"></script>
-
-
     <script type="module" src="/scripts/pages/photographer.js"></script>
-    <script type="module" src="/scripts/utils/contactForm.js"></script>
+
 </body>
 
 </html>
