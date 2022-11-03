@@ -10,6 +10,7 @@ export default class photographerMedia {
         this.dom = null;
     }
 
+    //gere l'affichage de l'icone like et incremente/decremente le nombre de like
     toggleLikes() {
         if (this.mediaLiked) {
             this.dom.likeButtonIcon.classList.replace("fa-heart", "fa-heart-o");
@@ -23,6 +24,7 @@ export default class photographerMedia {
         this.dom.likeNumber.textContent = this.mediaLikes;
     }
 
+    //ouvre le lightbox au clique sur le media
     listenLightboxMedia(element) {
         element.closest('a').addEventListener('click', () => {
             openLightbox(this);
@@ -30,6 +32,7 @@ export default class photographerMedia {
         })
     }
 
+    //affiche le media sur la liste des media de la page de profil
     renderMedia(article) {
         const name = document.createElement('label');
         name.setAttribute("for", "media");

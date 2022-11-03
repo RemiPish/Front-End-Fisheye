@@ -11,6 +11,7 @@ export default class photographer {
         this.id = photographer['id'];
     }
 
+    //affiche le photographe sur sa page de profil
     renderPhotographer() {
 
         const article = document.createElement('article');
@@ -61,6 +62,7 @@ export default class photographer {
         return (article);
     }
 
+    //affiche le photographe sur la page d'index (liste des photographes)
     renderIndex() {
         const article = document.createElement('article');
 

@@ -1,5 +1,7 @@
 import photographerMedia from "./photographerMedia.js";
 import { lightboxImg } from "../pages/photographer.js";
+
+//factory image de photographerMedia
 class image extends photographerMedia {
     constructor(data, name) {
         super(data);
@@ -7,6 +9,7 @@ class image extends photographerMedia {
         this.type = 'image';
     }
 
+    //affiche la photo sur lightbox
     showMediaInLightbox() {
 
         const mediaTitle = document.createElement('div');
@@ -21,6 +24,7 @@ class image extends photographerMedia {
         lightboxImg.appendChild(mediaTitle);
     }
 
+     //affiche la photo sur la liste des media du photographe 
     render() {
 
         const article = document.createElement('article');

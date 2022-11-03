@@ -34,6 +34,7 @@ function displayPhotographer(photographers, id) {
     photographersSection.appendChild(photographerClass.renderPhotographer());
 }
 
+//affiche le nombre total de like sur les photos d'un photographe sur sa page de profil
 function displayTotalCount(photographerClass) {
     const totalLikesPriceSection = document.querySelector(".totalLikes-price");
 
@@ -57,6 +58,7 @@ function displayTotalCount(photographerClass) {
     totalLikesPriceSection.appendChild(price);
 }
 
+//remplit la liste de media d'un photographe
 function hydrate(mediaList, id) {
     let list = mediaList.filter(elt => {
         return id == elt.photographerId;
@@ -67,25 +69,22 @@ function hydrate(mediaList, id) {
     })
 }
 
+//affiche les medias sur la page du profil du photographe en ordre en fonction du filtre (popularite, titre, date)
 function display(medias) {
     const mediaSection = document.querySelector(".media-list");
-    console.log(sortType)
     mediaSection.innerHTML = '';
 
     switch (sortType) {
         case 'popularite': {
             medias.sort((a, b) => a.mediaLikes > b.mediaLikes ? -1 : 1);
-            console.log("ZULUL");
         }
             break;
         case 'titre': {
             medias.sort((a, b) => a.mediaName > b.mediaName ? 1 : -1);
-            console.log("POG");
         }
             break;
         case 'date': {
             medias.sort((a, b) => a.mediaDate > b.mediaDate ? 1 : -1);
-            console.log("Pepepains");
         }
             break;
     }
@@ -94,6 +93,7 @@ function display(medias) {
     });
 }
 
+//ecoute les events sur les coeurs pour chaque media afin d'incrementer son like/ like total du photographe
 function listen(medias) {
     medias.forEach((media) => {
         media.dom.likeButton.addEventListener("click", () => {
@@ -105,6 +105,7 @@ function listen(medias) {
     })
 }
 
+//compte le nombre total de like du photographe
 function countTotal() {
     totalLikes = 0;
     medias.forEach(elt => {
@@ -112,14 +113,15 @@ function countTotal() {
     })
 }
 
+//ouvre le lightbox au clique sur un media
 export function openLightbox(mediaElt) {
     isLightboxOpen = true;
     lightboxContainer.style.display = "block";
     selectedMediaID = mediaElt.id;
     checkLightboxArrows(mediaElt);
-
 }
 
+//ecoute les events sur lightbox pour aller sur le media precedent/suivant avec fleches au clique- fleche de clavier ainsi que pour fermer le lightbox
 function listenLightbox() {
     prevMediaBtn.addEventListener('click', () => {
         let previousMediaIndex = medias.map((elt => elt.id)).indexOf(selectedMediaID) - 1;
@@ -165,6 +167,7 @@ function listenLightbox() {
 
 }
 
+//verifie la visibilite des fleches de lightbox au premier/dernier media de la liste
 function checkLightboxArrows(mediaElt) {
     prevMediaBtn.style.visibility = "visible";
     nextMediaBtn.style.visibility = "visible";
@@ -180,15 +183,13 @@ function checkLightboxArrows(mediaElt) {
     }
 }
 
+//ferme le lightbox
 export function closeLightbox() {
     isLightboxOpen = false;
     lightboxContainer.style.display = "none";
 }
 
-export function showDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
+//ecoute les event du dropdown de tri: ouvre au clique, selectionne le tri, ferme lors qu'on clique ailleur
 function listenDropdown() {
     document.getElementById('sort-select').addEventListener('click', function () {
         this.querySelector('.select').classList.toggle('open');
