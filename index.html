@@ -13,11 +13,12 @@
 
 <body>
   <header>
-    <a href="/" aria-labelledby="retour a la page index"><img src="assets/images/logo.png" class="logo" alt="logo fisheye"/></a>
-    <h1 tabindex="0">Nos photographes</h1>
+    <a href="/" aria-labelledby="retour a la page index" role="link"><img src="assets/images/logo.png" class="logo"
+        alt="logo fisheye" /></a>
+    <h1  role="heading" >Nos photographes</h1>
   </header>
   <main id="main">
-    <div class="photographer_section"></div>
+    <div role="list" class="photographer_section"></div>
   </main>
   <script type="module" src="scripts/fetchData.js"></script>
   <script type="module" src="scripts/factories/photographer.js"></script>

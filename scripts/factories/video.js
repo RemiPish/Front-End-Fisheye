@@ -1,18 +1,18 @@
 import photographerMedia from "./photographerMedia.js";
 import { lightboxImg } from "../pages/photographer.js";
+
+//factory video de photographerMedia
 export default class video extends photographerMedia {
     constructor(data, name) {
         super(data);
         this.src = `assets/photographers/${name}/${data['video']}`
         this.type = 'video';
-
     }
 
+    //affiche la video sur lightbox
     showMediaInLightbox() {
-        
         const mediaTitle = document.createElement('div');
 
-        
         let video = document.createElement('video');
         video.setAttribute("width", "900");
         video.setAttribute("height", "600");
@@ -32,8 +32,8 @@ export default class video extends photographerMedia {
         lightboxImg.appendChild(mediaTitle);
     }
 
+    //affiche la video sur la liste des media du photographe 
     render() {
-
         const article = document.createElement('article');
         article.setAttribute('data-id', this.id);
         let media = document.createElement('video');
@@ -41,8 +41,7 @@ export default class video extends photographerMedia {
         media.setAttribute("height", "300");
 
         let anchor =  document.createElement('a');
-        anchor.setAttribute('aria-describedby', "ouvrir la video en grand sur le lightbox");
-        anchor.setAttribute('role', "button");
+        anchor.setAttribute('aria-label',`Ouvrir l'image ${this.mediaName}`);
         anchor.setAttribute('href', "#");
         let videoSource = document.createElement('source');
         videoSource.setAttribute("src", this.src);

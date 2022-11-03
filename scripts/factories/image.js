@@ -30,8 +30,7 @@ class image extends photographerMedia {
         const article = document.createElement('article');
         article.setAttribute('data-id', this.id);
         let anchor = document.createElement('a');
-        anchor.setAttribute('aria-describedby', "ouvrir l'image en grand sur le lightbox");
-        anchor.setAttribute('role', "button");
+        anchor.setAttribute('aria-label', `Ouvrir l'image ${this.mediaName}`);
         anchor.setAttribute('href', "#");
         let media = document.createElement('img');
         media.setAttribute("src", this.src);

@@ -140,6 +140,11 @@ function listenLightbox() {
 
     const lightboxCloseButton = document.querySelector(".lightbox-close");
     lightboxCloseButton.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", ({ key }) => {
+        if (key === "Escape") {
+            closeLightbox();
+        }
+    })
 
     document.onkeydown = function (e) {
         if (isLightboxOpen) {
@@ -176,11 +181,14 @@ function checkLightboxArrows(mediaElt) {
     if (mediaElt === medias[0]) {
         prevMediaBtn.style.visibility = "hidden";
         prevMediaBtn.disabled = true;
+        nextMediaBtn.focus();
     }
-    if (mediaElt === medias[medias.length - 1]) {
+    else if (mediaElt === medias[medias.length - 1]) {
         nextMediaBtn.style.visibility = "hidden";
         nextMediaBtn.disabled = true;
+        prevMediaBtn.focus();
     }
+    else prevMediaBtn.focus();
 }
 
 //ferme le lightbox
@@ -195,21 +203,41 @@ function listenDropdown() {
         this.querySelector('.select').classList.toggle('open');
     })
 
+    document.getElementById('sort-select').addEventListener('focusin', function () {
+        document.addEventListener("keydown", ({ key }) => {
+            if (key === "Enter") {
+                this.querySelector('.select').classList.toggle('open');
+
+            }
+        })
+    })
+
+
     for (const option of document.querySelectorAll(".dropdown-option")) {
+        option.setAttribute("aria-label", `Selectionner ${option.dataset.value}`)
+
         option.addEventListener('click', function () {
-            let optionText = this.textContent;
-            let optionValue = this.dataset.value;
+
+            let optionText = option.textContent;
+            let optionValue = option.dataset.value;
             sortType = optionValue;
-            document.getElementById('sort-select').classList.add('open');
-            this.textContent = this.closest('.select').querySelector('.dropdown-btn span').textContent;
-            this.dataset.value = this.closest('.select').querySelector('.dropdown-btn span').dataset.value;
-            this.closest('.select').querySelector('.dropdown-btn span').textContent = optionText;
-            this.closest('.select').querySelector('.dropdown-btn span').dataset.value = optionValue;
+
+            option.textContent = this.closest('.select').querySelector('.dropdown-btn a').textContent;
+            option.dataset.value = this.closest('.select').querySelector('.dropdown-btn a').dataset.value;
+            option.setAttribute("aria-label", `Selectionner ${option.dataset.value}`)
+
+            this.closest('.select').querySelector('.dropdown-btn a').textContent = optionText;
+            this.closest('.select').querySelector('.dropdown-btn a').dataset.value = optionValue;
+            this.closest('.select').querySelector('.dropdown-btn a').setAttribute("aria-label", `Selectionner ${optionValue}`)
+
 
             display(medias);
             listen(medias);
         })
     }
+
+
+
     window.addEventListener('click', function (e) {
         const select = document.querySelector('.select')
         if (!select.contains(e.target)) {

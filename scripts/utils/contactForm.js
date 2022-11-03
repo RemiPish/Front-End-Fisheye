@@ -124,3 +124,10 @@ function hideError(form) {
 }
 
 validate();
+
+document.addEventListener("keydown", ({key}) => {
+    if (key === "Escape") 
+    {
+        closeModal();
+    }
+})

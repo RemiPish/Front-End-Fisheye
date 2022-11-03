@@ -1,5 +1,9 @@
 @import url("photographer.css");
 
+*:focus {
+    outline: 5px solid #d71ef7;
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0 auto;
@@ -50,10 +54,11 @@ h1 {
     border: 1px solid transparent;
 }
 
-.photographer_section article:hover {
+.photographer_section article a:hover, .photographer_section article a:focus {
     border: #901C1C solid 1px;
     background-color: #cfcfcf;
 }
+
 
 .photographer_section article a {
     justify-self: center;
